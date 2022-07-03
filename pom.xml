@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.AuD.common</groupId>
+    <artifactId>common-function</artifactId>
+    <version>1.0.0</version>
+	<name>common-function</name>
+    <description>通用工具/组件</description>
+
+    <!-- ======================================================================================== -->
+    <!-- 关于POM.xml文件的建议: -->
+    <!-- 1.尽量使pom.xml不要显得太臃肿,不要为了某个/某几个function,而引入其他相关依赖. -->
+    <!-- 2.若function在依赖中已存在,或者自己可以简单实现的方法,都不要引入其他的依赖. -->
+    <!-- eg.StringUtils(字符串处理类)在spring-core已存在,并且可以满足需求的情况下,不要重写StringUtils -->
+    <!-- ======================================================================================== -->
+
+
+    <properties>
+        <!-- 指定编译字符集 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- 指定编译版本,maven默认1.4,关于这点可以参考maven.setting.xml文件 -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- 以下是依赖版本变量设置 -->
+        <alibaba.easyexcel.version>2.2.7</alibaba.easyexcel.version>
+        <jwt.version>0.9.1</jwt.version>
+        <commons.csv.version>1.8</commons.csv.version>
+        <servlet-api.version>2.5</servlet-api.version>
+        <logback.version>1.2.3</logback.version>
+    </properties>
+
+
+    <!-- 依赖列表 === https://mvnrepository.com/ -->
+    <dependencies>
+
+        <!-- easyexcel === 内部对apache.poi的封装(包含了poi坐标) -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>${alibaba.easyexcel.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- jwt -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jwt.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>${commons.csv.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- servlet依赖 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>${servlet-api.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+
+        <!-- 以下依赖属于是test依赖范围 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.16</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- fastjson,主要用于测试fastjson-API -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.71</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Jackson依赖,以下依赖摘自"spring-boot-starter-json-2.4.2" -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.11.4</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Jackson 处理JDK8 LocalDateTime类型 依赖 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jdk8</artifactId>
+            <version>2.11.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.11.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-parameter-names</artifactId>
+            <version>2.11.4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13</version>
+            <scope>test</scope>
+        </dependency>
+
+
+    </dependencies>
+
+
+    <build>
+        <!-- maven设置打包生成jar包的名称 -->
+        <!-- <finalName>commons-function</finalName>-->
+        <!-- 构建插件列表 -->
+        <plugins>
+            <!-- 打包源码 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <version>3.2.1</version>
+            </plugin>
+        </plugins>
+    </build>
+	
+	<repositories>
+        <repository>
+            <id>aliyun</id>
+            <name>aliyun</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
+
+</project>
